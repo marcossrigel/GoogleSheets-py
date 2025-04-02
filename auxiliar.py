@@ -11,3 +11,7 @@ if minuto_mais_1 == 60:
     minuto_mais_1 = 0
 
 pywhatkit.sendwhatmsg("+558994994977", "Ola Rhuaan, Esta é uma mensagem programada", numero_da_hora, minuto_mais_1)
+
+
+
+

@@ -4,4 +4,11 @@ url = 'https://docs.google.com/spreadsheets/d/1p5GkS4ngPcai_U8p2rOKnj3_kiefYYv38
 
 df = pd.read_csv(url)
 
-print(df.head())
+id_procurado = 1
+
+resultado = df[df['ID'] == id_procurado]
+
+if not resultado.empty:
+    print(resultado.to_string(index=False))
+else:
+    print("ID não encontrado.")

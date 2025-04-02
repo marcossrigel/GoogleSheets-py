@@ -4,4 +4,4 @@ url = 'https://docs.google.com/spreadsheets/d/1p5GkS4ngPcai_U8p2rOKnj3_kiefYYv38
 
 df = pd.read_csv(url)
 
-df.head()
+print(df.head())

@@ -1,23 +1,19 @@
+from datetime import datetime
 import pandas as pd
-import pywhatkit
-import datetime
+import pyautogui
+import pyperclip
+import webbrowser
+import time
 import re
 
-df = pd.read_csv('https://docs.google.com/spreadsheets/d/1p5GkS4ngPcai_U8p2rOKnj3_kiefYYv383L6oevaNmM/export?format=csv')
-resultado = df[df['ID'] == 2]
+url = 'https://docs.google.com/spreadsheets/d/1p5GkS4ngPcai_U8p2rOKnj3_kiefYYv383L6oevaNmM/export?format=csv'
+df = pd.read_csv(url, usecols=['ID', 'Nome', 'Telefone'])
 
-nome = resultado['Nome'].values[0]
-telefone = resultado['Telefone'].values[0]
+resultado = df.loc[df['ID'] == 4].squeeze()
+nome = resultado['Nome']
+numero = re.sub(r'\D', '', resultado['Telefone'])
 
-numero = re.sub(r'\D', '', telefone)
+link = f"https://web.whatsapp.com/send?phone={numero}&text=Olá {nome}, esta é uma mensagem automática :)"
 
-hora_atual = datetime.datetime.now()
-
-numero_da_hora = hora_atual.hour
-numero_do_minuto = hora_atual.minute
-minuto_mais_1 = numero_do_minuto + 1
-
-if minuto_mais_1 == 60:
-    minuto_mais_1 = 0
-
-pywhatkit.sendwhatmsg(f"+55{numero}", f"Ola {nome}, Esta é uma mensagem programada", numero_da_hora, minuto_mais_1)
+webbrowser.open(link)
+pyautogui.press('enter')

@@ -19,4 +19,5 @@ for _, row in df_hoje.iterrows():
     webbrowser.open(f'https://web.whatsapp.com/send?phone={numero}&text=Olá {nome}, esta é uma mensagem automática :)')
     time.sleep(5)
     pyautogui.press('enter')
+    pyautogui.hotkey('ctrl', 'w')
     time.sleep(3)

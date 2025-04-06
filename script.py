@@ -21,4 +21,8 @@ planilha_completa = client.open(
     )
 
 planilha = planilha_completa.get_worksheet(0)
+<<<<<<< HEAD
 dados = planilha.get_all_records()
+=======
+dados = planilha.get_all_records()
+>>>>>>> 7897b18a4ca9310e7a3613aad21d7136b1ab2600

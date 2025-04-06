@@ -1,11 +1,11 @@
 from oauth2client.service_account import ServiceAccountCredentials
+import pandas as pd
 import gspread
-import os
 
-file = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+file = 'formulariosolicitacaopagamento-0127aa11a88d.json'
 scopes = [
-  "https://spreadsheets.google.com/feeds",
-  "https://www.googleapis.com/auth/drive",
+  'https://spreadsheets.google.com/feeds',
+  'https://www.googleapis.com/auth/drive',
 ]
 
 creds = ServiceAccountCredentials.from_json_keyfile_name(
@@ -13,9 +13,12 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(
   scopes=scopes
   )
 client = gspread.authorize(creds)
-print(client)
+#print(client)
 
 planilha_completa = client.open(
-    title="", 
-    folder_id=""
-)
+    title='Planilha Teste - GoogleSheetPython',
+    folder_id='1LJvfZ4QtUpJoi03guWZLAiktIbdHiL8z',
+    )
+
+planilha = planilha_completa.get_worksheet(0)
+dados = planilha.get_all_records()

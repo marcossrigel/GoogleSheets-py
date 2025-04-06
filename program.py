@@ -1,23 +1,17 @@
-import pandas as pd
-import pyautogui
 import webbrowser
+import datetime
+import script
 import time
-import re
-from datetime import datetime
 
-url = 'https://docs.google.com/spreadsheets/d/1p5GkS4ngPcai_U8p2rOKnj3_kiefYYv383L6oevaNmM/export?format=csv'
+cabecalho = script.planilha.row_values(1)
+coluna_status_index = cabecalho.index('Status') + 1
 
-df = pd.read_csv(url, usecols=['Nome', 'Telefone', 'Data'])
-df['Data'] = pd.to_datetime(df['Data'], dayfirst=True, errors='coerce')
-hoje = pd.to_datetime(datetime.today().date())
+data_atual = datetime.date.today().strftime('%d/%m/%Y')
 
-df_hoje = df[df['Data'] == hoje]
+for i, linha in enumerate(script.dados, start=2):
+  if linha.get('Data') == data_atual:
+    if linha.get('Status') == '':
+      webbrowser.open(f'https://web.whatsapp.com/send?phone={linha.get('Telefone')}&text=Olá {linha.get('Nome')}, esta é uma mensagem automática :)')
+      time.sleep(5)
+      script.planilha.update_cell(i, coluna_status_index, 'Enviado')
 
-for _, row in df_hoje.iterrows():
-    nome = row['Nome']
-    numero = re.sub(r'\D', '', row['Telefone'])
-    webbrowser.open(f'https://web.whatsapp.com/send?phone={numero}&text=Olá {nome}, esta é uma mensagem automática :)')
-    time.sleep(10)
-    #pyautogui.press('enter')
-    #pyautogui.hotkey('ctrl', 'w')
-    time.sleep(10)

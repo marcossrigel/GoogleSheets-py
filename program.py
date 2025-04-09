@@ -12,6 +12,6 @@ for i, linha in enumerate(script.dados, start=2):
   if linha.get('Data') == data_atual:
     if linha.get('Status') == '':
       webbrowser.open(f'https://web.whatsapp.com/send?phone={linha.get('Telefone')}&text=Olá {linha.get('Nome')}, esta é uma mensagem automática :)')
-      time.sleep(5)
+      time.sleep(7)
       script.planilha.update_cell(i, coluna_status_index, 'Enviado')
 

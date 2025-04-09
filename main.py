@@ -7,7 +7,7 @@ import os
 import gspread
 
 def descriptografar_credencial(caminho_cripto, caminho_temp, caminho_chave):
-    key = b'Aih-llrMvRwkzDEJMQV8edVzRuaOCycAEK9hwroVVgY='
+    key = b'Cv_tn1OWIWHUVQ3YW6jy2SUAdZWE-Br2ws05_jfs1o0='
     fernet = Fernet(key)
     with open(caminho_cripto, 'rb') as arquivo_criptografado:
         criptografado = arquivo_criptografado.read()
@@ -43,7 +43,7 @@ def enviar_mensagens(planilha):
 
 
 def main():
-    caminho_cripto = 'formulariosolicitacaopagamento-0127aa11a88d.json'
+    caminho_cripto = 'formulariosolicitacaopagamento-f683a63c3e41.json'
     caminho_chave = 'chave.key'
     caminho_temp = 'credenciais_temp.json'
 
@@ -53,7 +53,7 @@ def main():
 
         planilha_completa = client.open(
             title='Planilha Teste - GoogleSheetPython',
-            folder_id='1LJvfZ4QtUpJoi03guWZLAiktIbdHiL8z'
+            folder_id='1LJvfZ4QtUpJoi03guWZLAiktIbdHiL8z?ths=true'
         )
         planilha = planilha_completa.get_worksheet(0)
         enviar_mensagens(planilha)
